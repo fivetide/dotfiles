@@ -53,15 +53,16 @@ end
 -- This function will run once every time Awesome is started
 local function run_once(cmd_arr)
     for _, cmd in ipairs(cmd_arr) do
-        awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
+        awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || %s", cmd, cmd))
+--        awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
     end
 end
 
 run_once({ 
-"urxvtd", 
+"picom -b --experimental-backends --backend=glx", 
+--"urxvtd", 
 "unclutter -root", 
 "firefox", 
-"picom -b --experimental-backends --backend=glx", 
 --"dwall -s forest", 
 "xautolock -time 10 -locker /home/bjoern/.config/awesome/lock.sh",
  }) -- entries must be separated by commas
